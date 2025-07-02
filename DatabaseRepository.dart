@@ -17,13 +17,11 @@ class Message {
 
 //_____----_______----_______________Aufgabe 3
 
-abstract class MockDatabaseRepository implements DatabaseRepository {
+class MockDatabaseRepository implements DatabaseRepository {
   List<Message?> messages = [];
-
   @override
   bool sendMessage(Message m) {
     messages.add(m);
-
     return true; // Eventuell Fehler abfragen, dann false senden
   }
 
@@ -35,6 +33,8 @@ abstract class MockDatabaseRepository implements DatabaseRepository {
   @override
   bool updateMessage(String id, String newMessage) {
     Message? message = messages.firstWhere(
+      //Lamdafunktion
+      //  // message?.messageId == id,
       (message) => message?.messageId == id,
     );
     if (message == null) {
@@ -46,6 +46,8 @@ abstract class MockDatabaseRepository implements DatabaseRepository {
 
   @override
   bool deleteMessage(String id) {
+    // Suche die Nachricht mit der gegebenen ID
+    // und entferne sie aus der Liste.
     Message? message = messages.firstWhere(
       (message) => message?.messageId == id,
     );
